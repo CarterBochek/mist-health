@@ -1,0 +1,10 @@
+.nav-box {
+    color: white;
+}
+#mist-health-title {
+    color: aqua;
+    background: linear-gradient(#6900f3, #0c001d);
+    background-attachment: fixed;
+    padding: 1%;
+    border-radius: 5%;
+}
