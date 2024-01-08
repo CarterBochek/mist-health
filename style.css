@@ -16,3 +16,8 @@ h2 {
     border-radius: 1em;
     transition: 2s;
 }
+#caption-img-kat {
+    height: 80vh;
+    width: 30vw;
+    margin-left: 10vw;
+}
