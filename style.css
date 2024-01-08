@@ -8,3 +8,10 @@
     padding: 1%;
     border-radius: 5%;
 }
+h2 {
+    color: #333;
+    font-weight: bold;
+}
+.insight-img {
+    border-radius: 1em;
+}
