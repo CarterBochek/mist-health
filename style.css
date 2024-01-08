@@ -1,12 +1,32 @@
 .nav-box {
     color: white;
 }
+a {
+    cursor: pointer;
+}
 #mist-health-title {
     color: aqua;
-    background: linear-gradient(#6900f3, #0c001d);
-    background-attachment: fixed;
+    background: linear-gradient(#6900f3, #0c001d) fixed;
     padding: 1%;
     border-radius: 5%;
+}
+.home-nav {
+    background: rgba(255, 255, 255, 0.5); /* You can adjust the color and opacity as needed */
+    backdrop-filter: blur(10px); /* Adjust the blur radius as needed */
+}
+#full-screen-img {
+    /*width: 100vw;*/
+    /*margin-right: 5vw;*/
+}
+h1 {
+    font-weight: bolder;
+    font-size: 60px;
+}
+#sunset-img {
+    width: 100vw;
+    height: 50vh;
+    border-radius: 1em;
+    background-attachment: fixed;
 }
 h2 {
     color: #333;
@@ -15,6 +35,10 @@ h2 {
 .insight-img {
     border-radius: 1em;
     transition: 2s;
+}
+.insight-caption {
+    margin-top: 10vh;
+    font-size: 48px;
 }
 #caption-img-kat {
     height: 80vh;
