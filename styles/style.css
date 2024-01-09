@@ -45,6 +45,9 @@ h2 {
     color: #333;
     font-weight: bold;
 }
+#user-registration-heading {
+    padding-top: 10vh;
+}
 .insight-img {
     border-radius: 3em;
     padding: 2em;
