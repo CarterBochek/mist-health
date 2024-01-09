@@ -1,12 +1,14 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const expressBodyParser = require('express');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
 // instance of express
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// Be sure that the path is correct
+app.use(express.static(__dirname + '/public'));
+app.use(expressBodyParser.urlencoded({ extended: true }));
+app.use(expressBodyParser.json());
 
 mongoose.connect('mongodb://localhost/your-db-name', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Database connected successfully'))
@@ -34,6 +36,10 @@ app.post('/register', async (req, res) => {
     } catch (error) {
         res.status(500).send('An error occurred while registering the user');
     }
+});
+
+app.get('/', (req, res) => {
+    res.send('Server is working');
 });
 
 app.listen(3000, () => console.log('Server is running on localhost:3000'));
