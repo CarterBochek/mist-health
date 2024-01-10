@@ -1,14 +1,13 @@
 const express = require('express');
-const expressBodyParser = require('express');
+const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
 // instance of express
 const app = express();
-// Be sure that the path is correct
 app.use(express.static(__dirname + '/public'));
-app.use(expressBodyParser.urlencoded({ extended: true }));
-app.use(expressBodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost/your-db-name', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Database connected successfully'))
@@ -27,7 +26,7 @@ app.post('/register', async (req, res) => {
         return res.status(400).send('Email and password are required');
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10); // hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ email, password: hashedPassword });
 
     try {
