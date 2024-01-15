@@ -1,13 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
+// SSL Certificate
+const privatekey = fs.readFileSync('./private.key', 'utf8');
+const publiccrt = fs.readFileSync('./public.crt', 'utf8');
+
+const credentials = {
+    key: privatekey,
+    cert: publiccrt
+};
+
 // instance of express
 const app = express();
-app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static('public'))
 
 mongoose.connect('mongodb://localhost/your-db-name', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Database connected successfully'))
@@ -20,25 +32,13 @@ const User = mongoose.model('User', new mongoose.Schema({
 }));
 
 app.post('/register', async (req, res) => {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-        return res.status(400).send('Email and password are required');
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ email, password: hashedPassword });
-
-    try {
-        await user.save();
-        res.status(201).send("User Registered Successfully");
-    } catch (error) {
-        res.status(500).send('An error occurred while registering the user');
-    }
 });
 
-app.get('/', (req, res) => {
-    res.send('Server is working');
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.listen(3000, () => console.log('Server is running on localhost:3000'));
+// Create HTTPS server with the credentials
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(3000, () => console.log('HTTPS Server running on port 3000'));

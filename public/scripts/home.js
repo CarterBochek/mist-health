@@ -1,5 +1,8 @@
 AOS.init();
 
+function validateAccount() {
+
+}
 // Define your routes, each associated with the element ID to display:
 const routes = {
     "/": "home",
