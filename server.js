@@ -5,10 +5,11 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
+const os = require('os'); // Add this
 
-// SSL Certificate
-const privatekey = fs.readFileSync('./private.key', 'utf8');
-const publiccrt = fs.readFileSync('./public.crt', 'utf8');
+// Replace '~' with os home directory
+const privatekey = fs.readFileSync(path.join(os.homedir(), 'keys/mist-health/key.pem'), 'utf8');
+const publiccrt = fs.readFileSync(path.join(os.homedir(), 'keys/mist-health/cert.pem'), 'utf8');
 
 const credentials = {
     key: privatekey,
@@ -32,10 +33,12 @@ const User = mongoose.model('User', new mongoose.Schema({
 }));
 
 app.post('/register', async (req, res) => {
+    // You can add the register logic here,
+    // make sure to hash the password before saving.
 });
 
 app.get('/', function(req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Create HTTPS server with the credentials
